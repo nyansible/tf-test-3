@@ -33,14 +33,15 @@ output "key_pair_name" {
   value       = module.key_pair.key_name
 }
 
-output "ssm_private_key_parameter" {
-  description = "SSM parameter path for the private SSH key"
-  value       = module.key_pair.ssm_parameter_name
+output "private_key_pem" {
+  description = "Private SSH key (use: terraform output -raw private_key_pem > key.pem)"
+  value       = module.key_pair.private_key_pem
+  sensitive   = true
 }
 
-output "get_private_key_command" {
-  description = "AWS CLI command to retrieve the private key"
-  value       = "aws ssm get-parameter --region ${var.aws_region} --name '${module.key_pair.ssm_parameter_name}' --with-decryption --query 'Parameter.Value' --output text > ${module.key_pair.key_name}.pem && chmod 600 ${module.key_pair.key_name}.pem"
+output "save_private_key_command" {
+  description = "Command to save the private key to a file"
+  value       = "terraform output -raw private_key_pem > ${module.key_pair.key_name}.pem && chmod 600 ${module.key_pair.key_name}.pem"
 }
 
 output "ssh_command_instance_1" {

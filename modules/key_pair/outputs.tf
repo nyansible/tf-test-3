@@ -1,14 +1,15 @@
 output "key_name" {
   description = "Name of the created key pair"
-  value       = module.key_pair.key_pair_name
+  value       = aws_key_pair.this.key_name
 }
 
 output "key_pair_id" {
   description = "ID of the created key pair"
-  value       = module.key_pair.key_pair_id
+  value       = aws_key_pair.this.id
 }
 
-output "ssm_parameter_name" {
-  description = "SSM parameter name where private key is stored"
-  value       = aws_ssm_parameter.private_key.name
+output "private_key_pem" {
+  description = "Private key in PEM format (sensitive)"
+  value       = tls_private_key.this.private_key_pem
+  sensitive   = true
 }
