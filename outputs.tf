@@ -40,7 +40,7 @@ output "ssm_private_key_parameter" {
 
 output "get_private_key_command" {
   description = "AWS CLI command to retrieve the private key"
-  value       = "aws ssm get-parameter --name '${module.key_pair.ssm_parameter_name}' --with-decryption --query 'Parameter.Value' --output text > ${module.key_pair.key_name}.pem && chmod 600 ${module.key_pair.key_name}.pem"
+  value       = "aws ssm get-parameter --region ${var.aws_region} --name '${module.key_pair.ssm_parameter_name}' --with-decryption --query 'Parameter.Value' --output text > ${module.key_pair.key_name}.pem && chmod 600 ${module.key_pair.key_name}.pem"
 }
 
 output "ssh_command_instance_1" {
