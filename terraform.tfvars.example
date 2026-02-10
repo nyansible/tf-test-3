@@ -1,0 +1,9 @@
+# Copy this file to terraform.tfvars and fill in your values
+# Note: SSH key pair is auto-generated and stored in AWS SSM Parameter Store
+
+aws_region         = "us-east-1"
+project_name       = "tf-test"
+instance_type      = "t2.micro"
+vpc_cidr           = "10.0.0.0/16"
+public_subnet_cidr = "10.0.1.0/24"
+availability_zone  = "us-east-1a"
